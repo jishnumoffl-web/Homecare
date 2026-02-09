@@ -1,4 +1,7 @@
+"use client";
+
 import { MapPin, Phone, Clock } from "lucide-react";
+import { useState } from "react";
 
 const locations = [
   {
@@ -24,6 +27,39 @@ const locations = [
 ];
 
 export default function Locations() {
+  const [form, setForm] = useState({
+    name: "",
+    address: "",
+    phone: "",
+    service: "",
+    aadhar: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const message = `
+New Service Request
+
+Name: ${form.name}
+Address: ${form.address}
+Phone: ${form.phone}
+Service Needed: ${form.service}
+Aadhar Number: ${form.aadhar}
+    `;
+
+    const whatsappNumber = "919567859200"; // change if needed
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message,
+    )}`;
+
+    window.open(url, "_blank");
+  };
+
   return (
     <section id="locations" className="py-20 md:py-28 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,6 +99,72 @@ export default function Locations() {
               </span>
             </div>
           ))}
+        </div>
+
+        {/* Contact Form */}
+        <div className="bg-card border border-border rounded-3xl p-8 md:p-12 mb-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">
+            Request Our Service
+          </h3>
+
+          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              required
+              value={form.name}
+              onChange={handleChange}
+              className="p-4 rounded-xl border border-border bg-background"
+            />
+
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              required
+              value={form.phone}
+              onChange={handleChange}
+              className="p-4 rounded-xl border border-border bg-background"
+            />
+
+            <input
+              type="text"
+              name="address"
+              placeholder="Address"
+              required
+              value={form.address}
+              onChange={handleChange}
+              className="p-4 rounded-xl border border-border bg-background md:col-span-2"
+            />
+
+            <input
+              type="text"
+              name="service"
+              placeholder="Service Needed (Home Nurse, Patient Care, Baby Care...)"
+              required
+              value={form.service}
+              onChange={handleChange}
+              className="p-4 rounded-xl border border-border bg-background"
+            />
+
+            <input
+              type="text"
+              name="aadhar"
+              placeholder="Aadhar Number"
+              required
+              value={form.aadhar}
+              onChange={handleChange}
+              className="p-4 rounded-xl border border-border bg-background"
+            />
+
+            <button
+              type="submit"
+              className="md:col-span-2 bg-primary text-primary-foreground py-4 rounded-xl font-semibold hover:opacity-90 transition"
+            >
+              Submit & Contact on WhatsApp
+            </button>
+          </form>
         </div>
 
         {/* Contact Banner */}
