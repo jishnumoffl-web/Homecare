@@ -8,6 +8,7 @@ import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
+import ClientProfile from "../components/Profile";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
+        <ClientProfile />
         <WhyUs />
         <Locations />
         <Process />
