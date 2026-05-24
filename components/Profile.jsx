@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, MapPin, BadgeCheck } from "lucide-react";
+import { Phone, MapPin, BadgeCheck, IdCard } from "lucide-react";
 
 export default function ClientProfile() {
   return (
@@ -18,6 +18,7 @@ export default function ClientProfile() {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
             About the Proprietor
           </h2>
+
           <p className="text-muted-foreground mt-3">
             Leadership you can trust at Sevanadhara Home Care Services
           </p>
@@ -36,7 +37,7 @@ export default function ClientProfile() {
             <div className="w-64 h-80 rounded-2xl overflow-hidden shadow-lg border-4 border-primary/10">
               <img
                 src="/images/profile.webp"
-                alt="Proprietor"
+                alt="Shijo Mathew Abraham"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -53,18 +54,26 @@ export default function ClientProfile() {
               <span className="font-medium text-foreground">
                 Sevanadhara Home Care Services
               </span>
-              . Serving as{" "}
-              <span className="font-medium text-foreground">Treasurer</span> of
-              PHSOA (Placement Home Nursing & Security Services Owners Welfare
-              Association), Alappuzha District.
+              . Former Treasurer of PHSOA (Placement Home Nursing & Security
+              Services Owners Welfare Association), Alappuzha District.
+              Currently serving as{" "}
+              <span className="font-medium text-foreground">
+                State Treasurer
+              </span>{" "}
+              of FORCE (Federation of Owners for Resources, Care and
+              Employment).
             </p>
 
             {/* Association Highlight */}
-            <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20">
+            <div className="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20 space-y-3">
               <p className="text-sm font-semibold text-primary flex items-center gap-2">
                 <BadgeCheck className="w-4 h-4" />
-                PHSOA – Placement Home Nursing & Security Services Owners
-                Welfare Association
+                FORCE – Federation of Owners for Resources, Care and Employment
+              </p>
+
+              <p className="text-sm text-foreground flex items-center gap-2">
+                <IdCard className="w-4 h-4 text-primary" />
+                REG.NO : ALP/107/2026
               </p>
             </div>
 
@@ -72,7 +81,7 @@ export default function ClientProfile() {
             <div className="mt-6 space-y-4 text-foreground">
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span>Alappuzha District, Kerala</span>
+                <span>Chengannur, Alappuzha, Kerala</span>
               </div>
 
               <div className="flex items-center gap-3">
