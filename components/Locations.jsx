@@ -1,14 +1,7 @@
 "use client";
 
-import { MapPin, Phone, Clock } from "lucide-react";
+import { Phone, Clock } from "lucide-react";
 import { useState } from "react";
-
-const locations = [
-  { name: "Chengannur", description: "Full service availability" },
-  { name: "Thiruvalla", description: "Complete home care services" },
-  { name: "Haripad", description: "All services available" },
-  { name: "Mavelikkara", description: "Full range of care services" },
-];
 
 const servicesList = [
   "Home Nurse",
@@ -27,6 +20,7 @@ export default function Locations() {
     phone: "",
     service: "",
     aadhar: "",
+    aadharFile: null,
     patientGender: "",
     familyMembers: "",
     nursePreference: "",
@@ -34,6 +28,13 @@ export default function Locations() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    setForm({
+      ...form,
+      aadharFile: e.target.files[0],
+    });
   };
 
   const handleSubmit = (e) => {
@@ -46,7 +47,8 @@ Name: ${form.name}
 Phone: ${form.phone}
 Address: ${form.address}
 Service: ${form.service}
-Aadhar: ${form.aadhar}
+Aadhar Number: ${form.aadhar}
+Aadhar File: ${form.aadharFile ? form.aadharFile.name : "Not Uploaded"}
 
 ${
   form.service === "Home Nurse"
@@ -59,7 +61,10 @@ Preferred Nurse: ${form.nursePreference}
 }
 `;
 
-    const url = `https://wa.me/919567859200?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/919778732718?text=${encodeURIComponent(
+      message,
+    )}`;
+
     window.open(url, "_blank");
   };
 
@@ -79,6 +84,7 @@ Preferred Nurse: ${form.nursePreference}
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full"
           >
+            {/* Name */}
             <input
               type="text"
               name="name"
@@ -86,9 +92,10 @@ Preferred Nurse: ${form.nursePreference}
               required
               value={form.name}
               onChange={handleChange}
-              className="w-full box-border p-4 rounded-xl border border-border bg-background"
+              className="w-full p-4 rounded-xl border border-border bg-background"
             />
 
+            {/* Phone */}
             <input
               type="tel"
               name="phone"
@@ -96,9 +103,10 @@ Preferred Nurse: ${form.nursePreference}
               required
               value={form.phone}
               onChange={handleChange}
-              className="w-full box-border p-4 rounded-xl border border-border bg-background"
+              className="w-full p-4 rounded-xl border border-border bg-background"
             />
 
+            {/* Address */}
             <input
               type="text"
               name="address"
@@ -106,15 +114,16 @@ Preferred Nurse: ${form.nursePreference}
               required
               value={form.address}
               onChange={handleChange}
-              className="w-full box-border p-4 rounded-xl border border-border bg-background md:col-span-2"
+              className="w-full p-4 rounded-xl border border-border bg-background md:col-span-2"
             />
 
+            {/* Service */}
             <select
               name="service"
               required
               value={form.service}
               onChange={handleChange}
-              className="w-full box-border p-4 rounded-xl border border-border bg-background md:col-span-2"
+              className="w-full p-4 rounded-xl border border-border bg-background md:col-span-2"
             >
               <option value="">Select Service</option>
               {servicesList.map((service, index) => (
@@ -124,17 +133,34 @@ Preferred Nurse: ${form.nursePreference}
               ))}
             </select>
 
+            {/* Aadhaar Number */}
             <input
               type="text"
               name="aadhar"
-              placeholder="Aadhar Number"
+              placeholder="Aadhaar Number"
               required
               value={form.aadhar}
               onChange={handleChange}
-              className="w-full box-border p-4 rounded-xl border border-border bg-background md:col-span-2"
+              className="w-full p-4 rounded-xl border border-border bg-background md:col-span-2"
             />
 
-            {/* CONDITIONAL FIELDS */}
+            {/* Aadhaar Upload */}
+            <div className="md:col-span-2">
+              <label className="block mb-2 font-medium">
+                Upload Aadhaar Card
+              </label>
+
+              <input
+                type="file"
+                name="aadharFile"
+                accept=".jpg,.jpeg,.png,.pdf"
+                required
+                onChange={handleFileChange}
+                className="w-full p-4 rounded-xl border border-border bg-background"
+              />
+            </div>
+
+            {/* Home Nurse Fields */}
             {form.service === "Home Nurse" && (
               <>
                 <select
@@ -142,7 +168,7 @@ Preferred Nurse: ${form.nursePreference}
                   required
                   value={form.patientGender}
                   onChange={handleChange}
-                  className="w-full box-border p-4 rounded-xl border border-border bg-background"
+                  className="w-full p-4 rounded-xl border border-border bg-background"
                 >
                   <option value="">Patient Gender</option>
                   <option value="Male">Male</option>
@@ -156,7 +182,7 @@ Preferred Nurse: ${form.nursePreference}
                   required
                   value={form.familyMembers}
                   onChange={handleChange}
-                  className="w-full box-border p-4 rounded-xl border border-border bg-background"
+                  className="w-full p-4 rounded-xl border border-border bg-background"
                 />
 
                 <select
@@ -164,7 +190,7 @@ Preferred Nurse: ${form.nursePreference}
                   required
                   value={form.nursePreference}
                   onChange={handleChange}
-                  className="w-full box-border p-4 rounded-xl border border-border bg-background md:col-span-2"
+                  className="w-full p-4 rounded-xl border border-border bg-background md:col-span-2"
                 >
                   <option value="">Preferred Nurse</option>
                   <option value="Male Nurse">Male Nurse</option>
@@ -173,6 +199,7 @@ Preferred Nurse: ${form.nursePreference}
               </>
             )}
 
+            {/* Submit */}
             <button
               type="submit"
               className="w-full md:col-span-2 bg-primary text-primary-foreground py-4 rounded-xl font-semibold hover:opacity-90 transition mt-2"
@@ -187,6 +214,7 @@ Preferred Nurse: ${form.nursePreference}
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
             Need Immediate Assistance?
           </h3>
+
           <p className="text-white/90 mb-6">
             Our team is available 24/7 to support your loved ones.
           </p>
